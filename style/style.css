@@ -1,0 +1,139 @@
+html,
+body {
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+}
+
+canvas {
+  position: absolute;
+}
+
+#renderer {
+  z-index: 0;
+}
+
+#speechBox {
+  text-align: center;
+  font-family: "Inconsolata", sans-serif;
+  font-size: 10vh;
+  display: inline;
+  z-index: 2;
+}
+
+#speech {
+  padding-top: 2vh;
+}
+
+#humanSpeech {
+  font-size: 3vh;
+  color: #696969;
+  padding: 5px;
+}
+
+.camera {
+  bottom: 0px;
+  right: 0px;
+  visibility: hidden;
+  position: fixed;
+  z-index: 3;
+  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg); /* Safari and Chrome */
+  -moz-transform: rotateY(180deg); /* Firefox */
+}
+
+.evenWidth {
+  font-family: "Inconsolata", sans-serif;
+}
+
+#dispTracking {
+  bottom: 0px;
+  right: 0px;
+  position: fixed;
+  visibility: hidden;
+  z-index: 4;
+  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg); /* Safari and Chrome */
+  -moz-transform: rotateY(180deg); /* Firefox */
+}
+
+.interfaceButton {
+  padding: 2vh;
+  border: none;
+  border-radius: 50px;
+  text-decoration: none;
+  background-color: #8eaefe;
+  color: white;
+  font-size: 30%;
+  width: 33vh;
+  outline: none;
+  font-family: "Inconsolata", sans-serif;
+}
+
+.speech-bubble {
+  position: absolute;
+  background: #ffffff;
+  width: 100%;
+  height: 40%;
+}
+
+.speech-bubble:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border: 29px solid transparent;
+  border-top-color: #ffffff;
+  border-bottom: 0;
+  margin-left: -29px;
+  margin-bottom: -29px;
+}
+
+#audioRenderer {
+  position: absolute;
+  z-index: 1;
+}
+
+#loadingText {
+  font-family: "Inconsolata", sans-serif;
+  padding: 50vh 0;
+  color: #331100;
+  text-align: center;
+  font-size: 200%;
+}
+
+#loader {
+  text-align: center;
+  position: absolute;
+  width: 10vh;
+  height: 10vh;
+  left: 50vw;
+  top: 40vh;
+  z-index: 5;
+  margin: -75px 0 0 -75px;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #f4a742;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Face Renderer</title>
+
+  <!-- These are css styles and fonts -->
+  <link rel="stylesheet" href="style/style.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
+  
+  <!-- These Scripts Help Connect to a Firebase Database -->
+  <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.5.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.5.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.5.0/firebase-database.js"></script>
+  
+  <!-- These Scripts use Tracking.js for Face and Color Tracking -->
+  <script type="text/javascript" src="scripts/tracking-min.js"></script>
+  <script type="text/javascript" src="scripts/face-min.js"></script>
+  
+  <!-- These Scripts use Optical Flow for Nod/Shake Detection -->
+  <script type="text/javascript" src="scripts/oflow.js"></script>
+  <script type="text/javascript" src="scripts/detectAnswer.js"></script>
+  
+  <!-- This Script Is for Speech Synthesis -->
+  <script type="text/javascript" src="https://unpkg.com/speech-synthesis-recorder@1.2.1/SpeechSynthesisRecorder.js"></script>
+  
+  <!-- This Where helper functions and things the user should change are stored -->
+  <script type="text/javascript" src='scripts/config.js'></script>
+
+</head>
+
+<body onload="LoadedPage()">
+  <!-- <div> for the loading animation -->
+  <div id="loadingPage">
+    <div id="loader"></div>
+    <div id="loadingText"> Loading... </div>
+  </div>
+  
+  <!-- Main <div>. It is hidden until the loading is done -->
+  <div id="mainContent" style=" visibility: hidden;">
+  
+    <!-- <div> for taking and displaying user input -->
+    <div id="speechBox" class="speech-bubble">
+      
+      <!-- <div> for displaying what the robot is current saying. And what the user said -->
+      <div id="speech">
+        <span id="speaking">ERROR: Data unavalable</span><br>
+        <span id="humanSpeech"></span>
+      </div>
+      
+      <!-- <div> for all the input buttons -->
+      <div id="speechInput">
+        <input type="button" class="interfaceButton" value="Click Me" id="leftBtn" onmousedown="buttonClick('leftButton')">
+        <input type="button" class="interfaceButton" value="Also Click Me" id="rightBtn" onmousedown="buttonClick('rightButton')">
+        <input type="button" class="interfaceButton" value="Change Emotion" onmousedown="changeEmotion()">
+        <input type="button" class="interfaceButton" value="Speech To Text" id="YN" onmousedown="speechToText()">
+        <input type="button" class="interfaceButton" value="Nod/Shake" onmousedown="detectAnswer()">
+      </div>
+
+    </div>
+    
+    <!-- Camera <div> where all the camera and canvas for CV are stored -->
+    <div id="faceTrackerDiv">
+      <video id="faceTracker" class='camera' width=320 height=280 preload autoplay loop muted> </video>
+      <video id="oflow" class='camera' width=320 height=280 preload autoplay loop muted> </video>
+      <canvas id="dispTracking" width=320 height=280></canvas>
+    </div>
+    
+    <!-- Canvas elements for the mouth, face, and background -->
+    <canvas id="audioRenderer" width='1000' height='500'></canvas>
+    <canvas id="renderer" width='1000' height='500'></canvas>
+    <canvas id="background" width='1000' height='500'></canvas>
+
+  </div>
+  
+  <!-- Firebase script -->
+  <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
+
+  <!-- These are all scripts written by the us and stored on CodePen.io -->
+  <script type="text/javascript" src='scripts/database.js'></script> <!-- Script for connecting to the database -->
+  <script type="text/javascript" src="scripts/speechRecognition.js"></script> <!-- Script for detecting what the user is saying -->
+  <script type="text/javascript" src='scripts/renderer.js'></script> <!-- The main script that renders the face and controls many other scripts -->
+  <script type="text/javascript" src='scripts/audioVisualizer.js'></script> <!-- Script for controlling the mouth-->
+  <script type="text/javascript" src='scripts/voice.js'></script> <!-- Script for speech synthesis -->
+  <script type="text/javascript" src='scripts/cameraTracker.js'></script> <!-- Script for face and color tracking -->
+
+  <!-- Script to play the loading animation -->
+  <script>
+    var load;
+
+    function LoadedPage() {
+      load = setTimeout(showPage, 5000);
+    }
+
+    function showPage() {
+      document.getElementById("loadingPage").style.display = "none";
+      document.getElementById("mainContent").style.visibility = "visible";
+    }
+  </script>
+
+</body>
+
+</html>
